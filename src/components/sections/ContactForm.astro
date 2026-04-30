@@ -15,6 +15,23 @@ const { contact } = Astro.props;
       {contact.subtitle && <p class="mt-4 text-lg text-muted-foreground">{contact.subtitle}</p>}
     </div>
 
+    <noscript>
+      <div
+        class="mb-6 rounded-2xl border border-warning-text bg-warning-bg p-4 text-sm text-warning-text"
+        role="alert"
+      >
+        <p class="font-semibold">JavaScript is disabled</p>
+        <p class="mt-1">
+          The form below will still submit, but the success/error feedback won't display
+          inline. Email us directly at
+          <a href="mailto:hello@bytetalent.com" class="font-medium underline hover:no-underline">
+            hello@bytetalent.com
+          </a>
+          if you prefer.
+        </p>
+      </div>
+    </noscript>
+
     <form
       id="contact-form"
       class="space-y-5 rounded-2xl border border-border bg-background p-8"

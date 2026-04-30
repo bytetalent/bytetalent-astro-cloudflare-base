@@ -1,0 +1,13 @@
+# Robots policy for the Bytetalent marketing site.
+# Per-project: regenerate with the project's actual hostname when scaffolding
+# a generated client repo.
+
+User-agent: *
+Allow: /
+
+# Block common attack-surface paths if any exist (none in the base; here for
+# the consultant to extend if a real engagement adds them).
+Disallow: /api/
+Disallow: /_astro/
+
+Sitemap: https://marketing.bytetalent.com/sitemap.xml
