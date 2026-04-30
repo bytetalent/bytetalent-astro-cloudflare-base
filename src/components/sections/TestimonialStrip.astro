@@ -1,0 +1,44 @@
+---
+import type { TestimonialsContent } from "@/content/site-content";
+
+interface Props {
+  testimonials: TestimonialsContent;
+}
+
+const { testimonials } = Astro.props;
+---
+
+<section class="py-16 md:py-20">
+  <div class="mx-auto max-w-[1200px] px-6">
+    {
+      testimonials.title && (
+        <h2 class="mb-12 text-center text-section-heading">{testimonials.title}</h2>
+      )
+    }
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {
+        testimonials.items.map((item) => (
+          <figure class="rounded-2xl border border-border bg-background p-7">
+            <blockquote class="text-base text-foreground leading-relaxed">
+              &ldquo;{item.quote}&rdquo;
+            </blockquote>
+            <figcaption class="mt-6 flex items-center gap-3">
+              <div class="h-10 w-10 rounded-full bg-muted" />
+              <div>
+                <div class="font-semibold text-foreground">{item.author}</div>
+                {(item.role || item.company) && (
+                  <div class="text-sm text-muted-foreground">
+                    {item.role}
+                    {item.role && item.company && " · "}
+                    {item.company}
+                  </div>
+                )}
+              </div>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>

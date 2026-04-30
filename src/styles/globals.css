@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens — Tailwind v4 CSS-first config.
+ * See bytetalent/docs/guide-design.md for the full token taxonomy.
+ *
+ * Per-project: substitute these values from the generated client's
+ * brand kit at scaffold time. The token *names* stay constant; values
+ * change per project.
+ */
+
+@theme {
+  /* Base palette */
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-border: #e2e8f0;
+
+  /* Brand */
+  --color-primary: #96c237; /* swap per project */
+  --color-primary-foreground: #ffffff;
+  --color-brand-dark: #0f0f11;
+  --color-brand-dark-bg: #1a1a1c;
+
+  /* Status */
+  --color-success-bg: #dcfce7;
+  --color-success-text: #166534;
+  --color-warning-bg: #fef3c7;
+  --color-warning-text: #92400e;
+  --color-error-bg: #fee2e2;
+  --color-error-text: #991b1b;
+  --color-info-bg: #dbeafe;
+  --color-info-text: #1e40af;
+
+  /* Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
+
+  /* Radius */
+  --radius: 0.625rem;
+  --radius-sm: 0.375rem;
+  --radius-lg: 0.75rem;
+  --radius-2xl: 1rem;
+}
+
+/* Dark mode overrides */
+.dark {
+  --color-background: #0a0a0b;
+  --color-foreground: #f8fafc;
+  --color-muted: #1e293b;
+  --color-muted-foreground: #94a3b8;
+  --color-border: #334155;
+}
+
+/* Reusable text utilities — see bytetalent/docs/guide-design.md §2 */
+@utility text-section-heading {
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-foreground);
+}
+
+@utility text-field-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted-foreground);
+}
+
+@utility text-2xs {
+  font-size: 0.6875rem;
+  line-height: 1rem;
+}
+
+/* Base styles */
+html {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* Reset focus outline — replace with project's focus style on interactive elements */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}

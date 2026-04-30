@@ -1,0 +1,9 @@
+# Design slot
+
+This folder holds the paired `.pen` baseline for this base. The Pencil
+file accumulates section-component designs that map 1:1 with the
+components in `src/components/sections/`.
+
+The .pen file is added in a follow-up commit when the design pass runs
+in the Pencil app. See `bytetalent/docs/guide-pencil.md` for the
+Pencil MCP workflow.

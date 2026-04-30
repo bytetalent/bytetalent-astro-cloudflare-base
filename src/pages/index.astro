@@ -1,0 +1,27 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SiteNav from "@/components/sections/SiteNav.astro";
+import HeroSection from "@/components/sections/HeroSection.astro";
+import FeaturesGrid from "@/components/sections/FeaturesGrid.astro";
+import TestimonialStrip from "@/components/sections/TestimonialStrip.astro";
+import PricingTable from "@/components/sections/PricingTable.astro";
+import FAQAccordion from "@/components/sections/FAQAccordion.astro";
+import TeamGrid from "@/components/sections/TeamGrid.astro";
+import CTABanner from "@/components/sections/CTABanner.astro";
+import ContactForm from "@/components/sections/ContactForm.astro";
+import SiteFooter from "@/components/sections/SiteFooter.astro";
+import { siteContent } from "@/content/site-content";
+---
+
+<Layout>
+  <SiteNav brand={siteContent.brand} nav={siteContent.nav} />
+  <HeroSection hero={siteContent.hero} />
+  <FeaturesGrid features={siteContent.features} />
+  <TestimonialStrip testimonials={siteContent.testimonials} />
+  <PricingTable pricing={siteContent.pricing} />
+  <FAQAccordion faq={siteContent.faq} />
+  <TeamGrid team={siteContent.team} />
+  <CTABanner cta={siteContent.cta} />
+  <ContactForm contact={siteContent.contact} />
+  <SiteFooter brand={siteContent.brand} footer={siteContent.footer} />
+</Layout>

@@ -1,0 +1,140 @@
+---
+import type { ContactContent } from "@/content/site-content";
+
+interface Props {
+  contact: ContactContent;
+}
+
+const { contact } = Astro.props;
+---
+
+<section id="contact" class="py-16 md:py-20">
+  <div class="mx-auto max-w-[680px] px-6">
+    <div class="text-center mb-10">
+      <h2 class="text-section-heading">{contact.title}</h2>
+      {contact.subtitle && <p class="mt-4 text-lg text-muted-foreground">{contact.subtitle}</p>}
+    </div>
+
+    <form
+      id="contact-form"
+      class="space-y-5 rounded-2xl border border-border bg-background p-8"
+      method="POST"
+      action="/api/contact"
+    >
+      <div class="space-y-1.5">
+        <label for="name" class="text-field-label block">Name</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          autocomplete="name"
+          class="h-10 w-full rounded-lg border border-border bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+        />
+      </div>
+
+      <div class="space-y-1.5">
+        <label for="email" class="text-field-label block">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          autocomplete="email"
+          class="h-10 w-full rounded-lg border border-border bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+        />
+      </div>
+
+      <div class="space-y-1.5">
+        <label for="company" class="text-field-label block">Company (optional)</label>
+        <input
+          id="company"
+          name="company"
+          type="text"
+          autocomplete="organization"
+          class="h-10 w-full rounded-lg border border-border bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+        />
+      </div>
+
+      <div class="space-y-1.5">
+        <label for="message" class="text-field-label block">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          required
+          class="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary resize-y"
+        ></textarea>
+      </div>
+
+      <!-- Honeypot — bots fill this; humans don't see it -->
+      <input
+        type="text"
+        name="website"
+        tabindex="-1"
+        autocomplete="off"
+        class="absolute left-[-9999px]"
+        aria-hidden="true"
+      />
+
+      <button
+        type="submit"
+        class="inline-flex h-11 w-full items-center justify-center rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        <span class="submit-label">Send message</span>
+        <span class="submit-loading hidden">Sending…</span>
+      </button>
+
+      <div
+        class="form-result hidden text-sm rounded-lg p-3"
+        role="status"
+        aria-live="polite"
+      ></div>
+    </form>
+  </div>
+</section>
+
+<script define:vars={{ successMessage: contact.successMessage }}>
+  const form = document.querySelector("#contact-form");
+  if (form) {
+    const button = form.querySelector('button[type="submit"]');
+    const labelEl = form.querySelector(".submit-label");
+    const loadingEl = form.querySelector(".submit-loading");
+    const resultEl = form.querySelector(".form-result");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      labelEl?.classList.add("hidden");
+      loadingEl?.classList.remove("hidden");
+      button?.setAttribute("disabled", "true");
+      resultEl?.classList.add("hidden");
+
+      try {
+        const formData = new FormData(form);
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          resultEl.textContent = successMessage ?? "Thanks — we'll be in touch shortly.";
+          resultEl.className =
+            "form-result text-sm rounded-lg p-3 bg-success-bg text-success-text";
+          form.reset();
+        } else {
+          resultEl.textContent = data.error ?? "Something went wrong. Please try again.";
+          resultEl.className = "form-result text-sm rounded-lg p-3 bg-error-bg text-error-text";
+        }
+      } catch (err) {
+        resultEl.textContent = "Couldn't reach the server. Please try again.";
+        resultEl.className = "form-result text-sm rounded-lg p-3 bg-error-bg text-error-text";
+      } finally {
+        labelEl?.classList.remove("hidden");
+        loadingEl?.classList.add("hidden");
+        button?.removeAttribute("disabled");
+      }
+    });
+  }
+</script>

@@ -1,0 +1,35 @@
+---
+import type { CTAContent } from "@/content/site-content";
+
+interface Props {
+  cta: CTAContent;
+}
+
+const { cta } = Astro.props;
+---
+
+<section class="py-16 md:py-20 bg-brand-dark text-white">
+  <div class="mx-auto max-w-[800px] px-6 text-center">
+    <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">{cta.title}</h2>
+    {cta.subtitle && <p class="mt-4 text-lg text-white/80">{cta.subtitle}</p>}
+
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href={cta.primaryCta.href}
+        class="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-6 text-base font-medium text-primary-foreground hover:opacity-90 transition-opacity w-full sm:w-auto"
+      >
+        {cta.primaryCta.label}
+      </a>
+      {
+        cta.secondaryCta && (
+          <a
+            href={cta.secondaryCta.href}
+            class="inline-flex h-12 items-center justify-center rounded-lg border border-white/20 bg-transparent px-6 text-base font-medium text-white hover:bg-white/10 transition-colors w-full sm:w-auto"
+          >
+            {cta.secondaryCta.label}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>

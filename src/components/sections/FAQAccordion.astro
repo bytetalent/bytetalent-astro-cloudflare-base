@@ -1,0 +1,34 @@
+---
+import type { FAQContent } from "@/content/site-content";
+
+interface Props {
+  faq: FAQContent;
+}
+
+const { faq } = Astro.props;
+---
+
+<section id="faq" class="py-16 md:py-20">
+  <div class="mx-auto max-w-[800px] px-6">
+    {faq.title && <h2 class="text-section-heading text-center mb-12">{faq.title}</h2>}
+
+    <div class="space-y-3">
+      {
+        faq.items.map((item) => (
+          <details class="group rounded-2xl border border-border bg-background p-6 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="text-base font-semibold text-foreground pr-6">{item.q}</span>
+              <span
+                class="flex-shrink-0 text-muted-foreground transition-transform group-open:rotate-180"
+                aria-hidden="true"
+              >
+                ▾
+              </span>
+            </summary>
+            <p class="mt-4 text-sm text-muted-foreground leading-relaxed">{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

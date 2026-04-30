@@ -1,0 +1,44 @@
+---
+import "@/styles/globals.css";
+import { siteContent } from "@/content/site-content";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = siteContent.meta.title, description = siteContent.meta.description } = Astro.props;
+const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://marketing.bytetalent.com";
+const canonical = new URL(Astro.url.pathname, siteUrl).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- OG / social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {siteContent.meta.ogImage && <meta property="og:image" content={siteContent.meta.ogImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts (system fallbacks declared in globals.css; remove if not using these) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen antialiased">
+    <slot />
+  </body>
+</html>

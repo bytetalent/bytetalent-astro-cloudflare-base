@@ -1,0 +1,65 @@
+---
+import type { PricingContent } from "@/content/site-content";
+
+interface Props {
+  pricing: PricingContent;
+}
+
+const { pricing } = Astro.props;
+---
+
+<section id="pricing" class="py-16 md:py-20 bg-muted/30">
+  <div class="mx-auto max-w-[1200px] px-6">
+    <div class="mx-auto max-w-[680px] text-center">
+      <h2 class="text-section-heading">{pricing.title}</h2>
+      {pricing.subtitle && <p class="mt-4 text-lg text-muted-foreground">{pricing.subtitle}</p>}
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5">
+      {
+        pricing.tiers.map((tier) => (
+          <div
+            class:list={[
+              "rounded-2xl border bg-background p-8 flex flex-col",
+              tier.featured ? "border-primary shadow-lg ring-1 ring-primary/20" : "border-border",
+            ]}
+          >
+            {tier.featured && (
+              <div class="mb-4 inline-flex w-fit rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary">
+                Most popular
+              </div>
+            )}
+            <h3 class="text-lg font-semibold text-foreground">{tier.name}</h3>
+            <p class="mt-2 text-sm text-muted-foreground">{tier.description}</p>
+
+            <div class="mt-6 flex items-baseline gap-1">
+              <span class="text-4xl font-extrabold text-foreground">{tier.price}</span>
+              {tier.period && <span class="text-sm text-muted-foreground">{tier.period}</span>}
+            </div>
+
+            <ul class="mt-6 space-y-2 flex-1">
+              {tier.features.map((feature) => (
+                <li class="flex items-start gap-2 text-sm text-foreground">
+                  <span class="mt-0.5 text-primary">✓</span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href={tier.cta.href}
+              class:list={[
+                "mt-8 inline-flex h-11 items-center justify-center rounded-lg px-5 text-sm font-medium transition-opacity",
+                tier.featured
+                  ? "bg-primary text-primary-foreground hover:opacity-90"
+                  : "border border-border bg-background text-foreground hover:bg-muted",
+              ]}
+            >
+              {tier.cta.label}
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

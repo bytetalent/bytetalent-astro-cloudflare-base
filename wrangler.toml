@@ -1,0 +1,20 @@
+name = "bytetalent-marketing"
+compatibility_date = "2026-01-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "./dist"
+
+# Per-project content & secrets are stored as Cloudflare environment variables.
+# Required in production:
+#   RESEND_API_KEY        — Resend API key for contact form sends
+#   CONTACT_TO_EMAIL      — destination address for contact-form submissions
+#   CONTACT_FROM_EMAIL    — verified sending domain address (must be verified in Resend)
+#
+# Set via:
+#   wrangler pages secret put RESEND_API_KEY
+#   wrangler pages secret put CONTACT_TO_EMAIL
+#   wrangler pages secret put CONTACT_FROM_EMAIL
+#
+# Or in the Cloudflare dashboard under Pages → Settings → Environment Variables.
+
+[vars]
+PUBLIC_SITE_URL = "https://marketing.bytetalent.com"

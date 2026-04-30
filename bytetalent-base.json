@@ -1,0 +1,37 @@
+{
+  "$schema": "https://bytetalent.com/schema/base-manifest.json",
+  "name": "bytetalent-astro-cloudflare-base",
+  "version": "1.0.0",
+  "description": "Astro + Cloudflare Pages marketing base. Section components wired to a per-project content manifest. Contact form via Resend.",
+  "stack": {
+    "framework": "astro",
+    "frameworkVersion": "^5.0.0",
+    "host": "cloudflare-pages",
+    "language": "typescript",
+    "styling": "tailwindcss",
+    "stylingVersion": "^4.0.0",
+    "runtime": "cloudflare-workers"
+  },
+  "bundleId": "astro-cloudflare",
+  "supportedTemplateBundles": ["astro-cloudflare"],
+  "sectionComponents": [
+    "hero-section",
+    "features-grid",
+    "testimonial-strip",
+    "pricing-table",
+    "faq-accordion",
+    "team-grid",
+    "cta-banner",
+    "contact-form",
+    "site-footer",
+    "site-nav"
+  ],
+  "contentManifest": "src/content/site-content.ts",
+  "envVars": {
+    "required": ["RESEND_API_KEY", "CONTACT_TO_EMAIL", "CONTACT_FROM_EMAIL"],
+    "optional": ["PUBLIC_SITE_URL"]
+  },
+  "dogfoodUrl": "https://marketing.bytetalent.com",
+  "docsRepo": "https://github.com/bytetalent/docs",
+  "lastUpdated": "2026-04-30"
+}
