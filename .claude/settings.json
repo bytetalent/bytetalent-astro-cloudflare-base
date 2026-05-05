@@ -38,6 +38,8 @@
       "Bash(npx prettier:*)",
       "Bash(npx eslint:*)",
       "Bash(npx tsc:*)",
+      "Bash(npx astro:*)",
+      "Bash(npx wrangler:*)",
       "Bash(pnpm install:*)",
       "Bash(pnpm run:*)",
       "Bash(pnpm build:*)",
@@ -46,7 +48,11 @@
       "Bash(bun install:*)",
       "Bash(bun run:*)",
       "Bash(bun add:*)",
-      "Bash(bun x:*)"
+      "Bash(bun x:*)",
+      "Bash(wrangler pages dev:*)",
+      "Bash(wrangler pages deploy:*)",
+      "Bash(wrangler tail:*)",
+      "Bash(wrangler deploy:*)"
     ],
     "deny": [
       "Read(**/.env)",
@@ -57,7 +63,9 @@
       "Read(**/credentials.json)",
       "Read(**/service-account*.json)",
       "Bash(git push --force *)",
-      "Bash(git push -f *)"
+      "Bash(git push -f *)",
+      "Bash(wrangler secret put:*)",
+      "Bash(wrangler secret delete:*)"
     ]
   }
 }

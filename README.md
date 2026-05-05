@@ -33,6 +33,12 @@ When the Bytetalent pipeline scaffolds a marketing-site project from this base, 
 
 This base never ships unchanged to a real client — it's the **scaffold input** the pipeline reads. But it does ship as itself to `marketing.bytetalent.com` to prove it works.
 
+## Agentic permissions
+
+`.claude/settings.json` ships with this base and is copied into every generated client repo by the scaffold. It pre-approves the tool calls that Claude Code agents need for autonomous work — git, GitHub CLI, Astro dev tooling, Wrangler/Cloudflare CLI — and blocks reads of secrets files (`.env*`, `*.pem`, `*.key`) and destructive git/Wrangler operations.
+
+When the scaffold generates a new client repo, the file carries over as-is. Project-specific additions (e.g. extra MCP server allow-entries) can be layered on top after scaffold.
+
 ## Conventions
 
 This repo follows [`bytetalent/docs`](https://github.com/bytetalent/docs) for universal cross-stack standards. Astro-specific deviations and patterns live in [`docs/guide-stack.md`](docs/guide-stack.md). See [`docs/README.md`](docs/README.md) for the overlay map.
