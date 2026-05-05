@@ -13,7 +13,9 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.{astro,ts,tsx,js,jsx,md,json,css}\"",
     "format:check": "prettier --check \"src/**/*.{astro,ts,tsx,js,jsx,md,json,css}\"",
-    "deploy": "wrangler pages deploy dist"
+    "deploy": "wrangler pages deploy dist",
+    "skills:sync": "node scripts/sync-universal-skills.mjs",
+    "skills:check-drift": "node scripts/check-universal-skills-drift.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^11.0.0",

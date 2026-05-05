@@ -39,6 +39,20 @@ This base never ships unchanged to a real client — it's the **scaffold input**
 
 When the scaffold generates a new client repo, the file carries over as-is. Project-specific additions (e.g. extra MCP server allow-entries) can be layered on top after scaffold.
 
+## Universal skills
+
+`skills/_universal/` is a vendored snapshot of the canonical skill library from [`bytetalent/docs/skills/`](https://github.com/bytetalent/docs). It is committed here so that Cloudflare Pages builds and generated client repos always have the full skill set without needing a second repo checkout.
+
+```bash
+# Re-sync after pulling changes to bytetalent/docs
+npm run skills:sync
+
+# Check for drift (run in CI when bytetalent/docs is checked out alongside)
+npm run skills:check-drift
+```
+
+The sync script resolves the source via `BYTETALENT_DOCS_PATH` env var, or falls back to `../docs/` (standard sibling checkout layout). Skills are universal — stack-applicability filtering is a future concern tracked separately.
+
 ## Conventions
 
 This repo follows [`bytetalent/docs`](https://github.com/bytetalent/docs) for universal cross-stack standards. Astro-specific deviations and patterns live in [`docs/guide-stack.md`](docs/guide-stack.md). See [`docs/README.md`](docs/README.md) for the overlay map.
